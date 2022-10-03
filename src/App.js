@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+ import React, { Component } from 'react'
+ 
+ class  App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+    
+      fullName:"hajerMahmoud",
+      bio:"etudiant",
+      profession:"etudiant",
+      bool:true ,
+      imag:"https://img-19.commentcamarche.net/cI8qqj-finfDcmx6jMK6Vr-krEw=/1500x/smart/b829396acc244fd484c5ddcdcb2b08f3/ccmcms-commentcamarche/20494859.jpg", 
+       
+    
+  }
+    this.myFunction = this.myFunction.bind(this);
+  }
+  
+  myFunction(e) {
+    
+    this.setState({fullName: this.state.fullName } )
+    this.setState({bio: this.state.bio} )
+  }
+    
+  
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+    render() {
+      if (this.state.bool)
+      return (
+        <div >
+          <p>Hello </p>
+    
+          <button onClick={this.myFunction}>
+           Click me!
+          </button>
+        </div>
+      );
+    }
+  }
+    
+  export default App;
