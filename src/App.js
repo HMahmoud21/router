@@ -17,9 +17,7 @@
   }
   
   myFunction(e) {
-    
-    this.setState({fullName: this.state.fullName } )
-    this.setState({bio: this.state.bio} )
+    alert("The full nzme  " + this.state.fullName +" the bio" +this.state.bio)
   }
     
   
