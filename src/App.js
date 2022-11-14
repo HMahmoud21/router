@@ -1,45 +1,53 @@
- 
-import React, { Component } from 'react'
-  class  App extends Component {
-    constructor(props) {
-      console.log("CONSTRUCTOR");
-      super(props)
-      this.state = {
-        fullName:"Hajer Mahmoud",
-        bio:"etudiant",
-        profession:"etudiant",
-        show:true ,
-        imag:"https://img-19.commentcamarche.net/cI8qqj-finfDcmx6jMK6Vr-krEw=/1500x/smart/b829396acc244fd484c5ddcdcb2b08f3/ccmcms-commentcamarche/20494859.jpg", 
-         count:0
-  
-    }
-     
-    }
-    
-  entDidMount() {
-this.setState({count:this.state.count + 1})
-    }
-    addCount = ()=> {
-      this.setState({count:this.state.count + 1})
-    }
-  showInfo = ()=>{
-    this.setState({show:!this.state.show})
-  }
-      render() {
-        console.log("RENDER");
-  
-      return ( <div>
-          {this.state.show ? (  <div>
-            <h2>Hello my name is {this.state.fullName} my bio {this.state.bio
-      } my profession{this.state.profession}</h2>
-          </div>):(  <div>
-            <h2>I can't show my information</h2>
-          </div>)}
-          <h3> {this.state.count}</h3>
-          <button onClick={()=>{this.showInfo();
-          this.addCount()}}>{this.state.show ? ("Hidde my information"):("Show my information")}</button>
-        </div>)
-      }
-    }
-      
-    export default App;
+import "./App.css";
+import { useState, useEffect } from "react";
+import Filter from "./components/Filter/Filter";
+import Movielist from "./components/MoviesList/Movieslist";
+import NavBar from "./components/NavBar/NavBar";
+import MovieTrailer from "./components/MovieTrailer/MovieTrailer";
+import { data } from "./data.js";
+import { Container } from "react-bootstrap";
+import { Routes, Route } from "react-router-dom";
+function App() {
+  const [textFilter, setTextFilter] = useState("");
+  const [starsRate, setStarsRate] = useState(0);
+
+  useEffect(() => {
+    alert("Welcome to my Movies App");
+  }, []);
+
+  const [movies, setMovies] = useState(data);
+
+  const addMovie = (newMovie) => {
+    setMovies([...movies, newMovie]);
+  };
+
+  return (
+    <div className="app">
+      <NavBar addMovie={addMovie} />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Container>
+              <Filter
+                setTextFilter={setTextFilter}
+                setStarsRate={setStarsRate}
+              />
+              <Movielist
+                movies={movies}
+                textFilter={textFilter}
+                starsRate={starsRate}
+              />
+            </Container>
+          }
+        />
+        <Route
+          path="/MovieTrailer/:movieid"
+          element={<MovieTrailer/>}
+        />
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
